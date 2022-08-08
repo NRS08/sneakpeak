@@ -1,0 +1,26 @@
+.carousel.carousel-slider {
+  overflow: inherit;
+}
+
+.carousel .control-next.control-arrow,
+.carousel .control-next.control-arrow:hover {
+  background-color: transparent;
+  /* background-color: rgba(0, 0, 0, 0.215); */
+}
+
+.carousel .control-prev.control-arrow,
+.carousel .control-prev.control-arrow:hover {
+  background-color: transparent;
+  /* background-color: rgba(0, 0, 0, 0.215); */
+}
+
+.carousel .control-arrow,
+.carousel.carousel-slider .control-arrow {
+  opacity: 1;
+}
+.carousel .control-next.control-arrow:before {
+  border-left: 12px solid black;
+}
+.carousel .control-prev.control-arrow:before {
+  border-right: 12px solid black;
+}

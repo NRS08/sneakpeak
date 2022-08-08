@@ -1,0 +1,8 @@
+.body {
+  position: relative;
+}
+.color-mode {
+  position: absolute;
+  top: 5%;
+  right: 1%;
+}

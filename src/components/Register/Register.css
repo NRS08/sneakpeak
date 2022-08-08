@@ -1,0 +1,7 @@
+.alert {
+  position: absolute;
+  display: inline-flex;
+}
+.show {
+  display: inline-flex;
+}

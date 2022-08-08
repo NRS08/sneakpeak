@@ -1,0 +1,37 @@
+.products {
+  position: relative;
+  /* min-height: calc(100vh - 117px);
+  max-height: calc(100vh - 117px); */
+}
+.sidebar {
+  z-index: 150;
+  position: absolute;
+  height: 90%;
+  bottom: 0;
+  transition: all 0.3s linear;
+  transform: translateY(100%);
+}
+.products-grid {
+  z-index: 149;
+}
+.show {
+  transform: translateY(0%);
+}
+.scroll {
+  height: 80vh;
+  overflow-y: auto;
+}
+@media screen and (min-width: 768px) {
+  .sidebar {
+    all: unset;
+    width: 100px;
+  }
+  .products {
+    display: flex;
+    position: relative;
+    /* height: calc(100vh - 103px); */
+  }
+  .scroll {
+    width: 100%;
+  }
+}
