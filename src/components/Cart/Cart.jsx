@@ -15,11 +15,13 @@ import { CartItem } from './CartItem';
 import { CartOrderSummary } from './CartOrderSummary';
 import { useNavigate } from 'react-router-dom';
 import { Link as LinkRouter } from 'react-router-dom';
+import { useGlobalContext } from '../../context';
 
 export const Cart = () => {
   const url = 'https://sneakpeak-api.herokuapp.com/api/v1/cart';
   const navigate = useNavigate();
-  const [data, setData] = React.useState();
+  const { cartData, setCartData } = useGlobalContext();
+  // const [data, setData] = React.useState();
   const [isLoading, setIsLoading] = React.useState(true);
   const { colorMode } = useColorMode();
   React.useEffect(() => {
@@ -32,7 +34,7 @@ export const Cart = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setData(data.cart);
+        setCartData(data.cart);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -44,7 +46,6 @@ export const Cart = () => {
       navigate('/login');
     }
   }, []);
-  // console.log(data);
   if (isLoading) {
     return (
       <Stack h={'100vh'} w="100%" justify="center" align="center">
@@ -91,18 +92,18 @@ export const Cart = () => {
           flex="2"
         >
           <Heading fontSize="2xl" fontWeight="extrabold">
-            Shopping Cart ({data.length})
+            Shopping Cart ({cartData.length})
           </Heading>
 
           <Stack spacing="6">
-            {data.map(item => (
+            {cartData.map(item => (
               <CartItem key={item._id} {...item} />
             ))}
           </Stack>
         </Stack>
 
         <Flex direction="column" align="center" flex="1">
-          <CartOrderSummary {...data} />
+          <CartOrderSummary {...cartData} />
           <HStack mt="6" fontWeight="semibold">
             <p>or</p>
             <Link color={colorMode === 'light' ? 'blue.500' : 'blue.200'}>

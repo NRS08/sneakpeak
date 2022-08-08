@@ -11,9 +11,10 @@ import {
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { FiGift } from 'react-icons/fi';
+import { PriceTag } from './PriceTag';
 
 export const CartProductMeta = props => {
-  const { isGiftWrapping = true, image, name, description } = props;
+  const { image, name, description, size } = props;
   const { colorMode } = useColorMode();
   return (
     <Stack direction="row" spacing="5" width="full">
@@ -37,7 +38,7 @@ export const CartProductMeta = props => {
             {description}
           </Text>
         </Stack>
-        {isGiftWrapping && (
+        {/* {isGiftWrapping && (
           <HStack
             spacing="1"
             mt="3"
@@ -48,7 +49,15 @@ export const CartProductMeta = props => {
               Add gift wrapping
             </Link>
           </HStack>
-        )}
+        )} */}
+        <HStack
+          spacing="1"
+          mt="3"
+          color={colorMode === 'light' ? 'gray.600' : 'gray.400'}
+        >
+          <Text fontWeight={'600'}>Size:</Text>
+          <Text>{size}</Text>
+        </HStack>
       </Box>
     </Stack>
   );

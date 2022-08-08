@@ -17,9 +17,6 @@ const OrderSummaryItem = props => {
   const { colorMode } = useColorMode();
   const { label, value, children } = props;
   var p = 0;
-  // data.map(item => {
-  //   return p + item.price;
-  // });
   return (
     <Flex justify="space-between" fontSize="sm">
       <Text
@@ -34,6 +31,7 @@ const OrderSummaryItem = props => {
 };
 
 export const CartOrderSummary = props => {
+  // console.log(props);
   const navigate = useNavigate();
   // const [price, setPrice] = React.useState(0);
   var p = 0;
@@ -71,7 +69,7 @@ export const CartOrderSummary = props => {
         size="lg"
         fontSize="md"
         rightIcon={<FaArrowRight />}
-        onClick={() => navigate('/checkout')}
+        onClick={() => navigate('/checkout', { state: props })}
       >
         Checkout
       </Button>

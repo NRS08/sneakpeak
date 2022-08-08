@@ -11,6 +11,7 @@ import { PriceTag } from './PriceTag';
 import { CartProductMeta } from './CartProductMeta';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useGlobalContext } from '../../context';
 
 const QuantitySelect = props => {
   const colorMode = useColorMode();
@@ -32,15 +33,8 @@ const QuantitySelect = props => {
 
 export const CartItem = props => {
   const url = 'https://sneakpeak-api.herokuapp.com/api/v1/cart';
-  const {
-    isGiftWrapping,
-    name,
-    description,
-    size,
-    image,
-    price,
-    onChangeQuantity,
-  } = props;
+  const { setCartData, cartData } = useGlobalContext();
+  const { name, description, size, image, price } = props;
   const currency = 'INR';
   const colorMode = useColorMode();
   const navigate = useNavigate();
@@ -52,7 +46,10 @@ export const CartItem = props => {
           Authorization: `Bearer ${token}`,
         },
       });
-      window.location.reload();
+      const cd = cartData.filter(item => {
+        return item._id != props._id;
+      });
+      setCartData(cd);
     } catch (error) {
       console.log(error);
     }
@@ -84,7 +81,8 @@ export const CartItem = props => {
         name={name}
         description={description}
         image={image}
-        isGiftWrapping={isGiftWrapping}
+        price={price}
+        size={size}
       />
 
       {/* Desktop */}
@@ -96,12 +94,6 @@ export const CartItem = props => {
           md: 'flex',
         }}
       >
-        <QuantitySelect
-          value={1}
-          onChange={e => {
-            onChangeQuantity?.(+e.currentTarget.value);
-          }}
-        />
         <PriceTag price={price} currency={currency} />
         <CloseButton
           aria-label={`Delete ${name} from cart`}
@@ -123,12 +115,7 @@ export const CartItem = props => {
         <Link onClick={onClickDelete} fontSize="sm" textDecor="underline">
           Delete
         </Link>
-        <QuantitySelect
-          value={1}
-          onChange={e => {
-            onChangeQuantity?.(+e.currentTarget.value);
-          }}
-        />
+
         <PriceTag price={price} currency={currency} />
       </Flex>
     </Flex>
