@@ -141,7 +141,12 @@ const Checkout = () => {
         position="fixed"
         top={'10px'}
       >
-        <Alert status={status} position={'absolute'} w={'auto'}>
+        <Alert
+          variant={'solid'}
+          status={status}
+          position={'absolute'}
+          w={'auto'}
+        >
           <AlertIcon />
           {message}
         </Alert>

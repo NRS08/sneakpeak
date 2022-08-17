@@ -266,9 +266,11 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map(link => (
-        <NavItem key={link.name} icon={link.icon}>
-          <LinkRouter to={`${link.to}`}>{link.name}</LinkRouter>
-        </NavItem>
+        <LinkRouter to={`${link.to}`}>
+          <NavItem key={link.name} icon={link.icon} to={link.to}>
+            {link.name}
+          </NavItem>
+        </LinkRouter>
       ))}
     </Box>
   );
@@ -278,13 +280,10 @@ interface NavItemProps extends FlexProps {
   icon: IconType;
   children: ReactText;
 }
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ to, icon, children, ...rest }: NavItemProps) => {
   return (
-    <Link
-      href="#"
-      style={{ textDecoration: 'none' }}
-      _focus={{ boxShadow: 'none' }}
-    >
+    // <Link style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+    <>
       <Flex
         align="center"
         p="4"
@@ -310,7 +309,8 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         )}
         {children}
       </Flex>
-    </Link>
+    </>
+    // </Link>
   );
 };
 

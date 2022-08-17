@@ -30,6 +30,8 @@ import {
   Heading,
   Button,
   Stack,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react';
 import { Link as LinkRouter } from 'react-router-dom';
 import {
@@ -60,8 +62,6 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, to: '/admin' },
   { name: 'Orders', icon: FiTrendingUp, to: '/admin/orders' },
   { name: 'Products', icon: FiCompass, to: '/admin/products' },
-  // { name: 'Favourites', icon: FiStar },
-  // { name: 'Settings', icon: FiSettings },
 ];
 
 export default function Orders({ children }: { children: ReactNode }) {
@@ -74,6 +74,10 @@ export default function Orders({ children }: { children: ReactNode }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { sidebarWidth, setName } = useGlobalContext();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [status, setStatus] = useState('success');
+  const [message, setMessage] = useState('okay');
+  const [isL, setIsL] = useState(false);
+  let orderId, order;
 
   useEffect(() => {
     const token = localStorage.getItem('tokenAdmin');
@@ -100,6 +104,68 @@ export default function Orders({ children }: { children: ReactNode }) {
     }
   }, [s]);
 
+  const cancel = () => {
+    document.querySelector('.alertDialog').style.display = 'none';
+  };
+  const show = (id, o) => {
+    orderId = id;
+    order = o;
+    document.querySelector('.alertDialog').style.display = 'flex';
+  };
+  const deliverOrder = async () => {
+    const token = localStorage.getItem('tokenAdmin');
+    if (token) {
+      try {
+        setIsL(true);
+        let body = {
+          name: order.name,
+          email: order.email,
+          address: order.address,
+          zipCode: order.zipCode,
+          city: order.city,
+          status: 'delivered',
+          items: order.items,
+          createdBy: order.createdBy,
+        };
+        const d = await axios.patch(url + '/' + orderId, body, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setStatus('success');
+        setMessage('Delivered');
+        const orders = data.filter(item => {
+          return item._id != orderId;
+        });
+        setData(orders);
+        const alert = document.querySelector('.alert');
+        alert.style.display = 'flex';
+        document.querySelector('.alertDialog').style.display = 'none';
+        setIsL(false);
+        setTimeout(() => {
+          const alert = document.querySelector('.alert');
+          alert.style.display = 'none';
+        }, 500);
+      } catch (error) {
+        setIsL(false);
+        console.log(error);
+        setStatus('error');
+        console.log(error);
+        setMessage(error.response.data.msg);
+        setIsLoading(false);
+        const alert = document.querySelector('.alert');
+        alert.style.display = 'flex';
+        document.querySelector('.alertDialog').style.display = 'none';
+        setTimeout(() => {
+          const alert = document.querySelector('.alert');
+          alert.style.display = 'none';
+        }, 3000);
+      }
+    } else {
+      navigate('/login/admin');
+    }
+  };
+
   useLayoutEffect(() => {
     function updateSize() {
       setWindowWidth(window.innerWidth);
@@ -109,6 +175,7 @@ export default function Orders({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
   const w = windowWidth - sidebarWidth;
+
   if (isLoading) {
     return (
       <Stack h={'100vh'} w="100%" justify="center" align="center">
@@ -123,6 +190,25 @@ export default function Orders({ children }: { children: ReactNode }) {
       // bg={useColorModeValue('gray.100', 'gray.900')}
       bg={colorMode === 'light' ? 'gray.100' : 'gray.900'}
     >
+      <Box
+        className="alert"
+        w={'95vw'}
+        display={'none'}
+        justifyContent="center"
+        position="fixed"
+        top={'10px'}
+        zIndex="21"
+      >
+        <Alert
+          variant={'solid'}
+          status={status}
+          position={'absolute'}
+          w={'auto'}
+        >
+          <AlertIcon />
+          {message}
+        </Alert>
+      </Box>
       <SidebarContent
         onClose={() => onClose}
         display={{ base: 'none', md: 'block' }}
@@ -263,9 +349,69 @@ export default function Orders({ children }: { children: ReactNode }) {
                   <CartItem key={item._id} {...item} />
                 ))}
               </Stack>
+              {s == 'pending' ? (
+                <Button
+                  mt={4}
+                  colorScheme="green"
+                  onClick={() => show(order._id, order)}
+                >
+                  Processed/Delivered
+                </Button>
+              ) : (
+                <></>
+              )}
             </Box>
           );
         })}
+      </Box>
+      <Box
+        position={'fixed'}
+        className="alertDialog"
+        zIndex="20"
+        top={0}
+        height={'100vh'}
+        width="100vw"
+        bg={'rgba(0, 0, 0, 0.6)'}
+        display="none"
+        justifyContent={'center'}
+        alignItems="center"
+      >
+        <Box
+          width={{ base: '90%', md: '50%', lg: '30%' }}
+          height="30%"
+          bg={colorMode == 'light' ? 'white' : '#2d3748'}
+          borderRadius="0.5rem"
+          p={6}
+          display="flex"
+          flexDirection={'column'}
+          justifyContent="flex-start"
+        >
+          <Text height={'20%'} fontSize={'lg'} fontWeight="bold">
+            Order Delivered
+          </Text>
+          <Text mt={2} height={'50%'}>
+            Are you sure? This cannot be undone
+          </Text>
+          <Box height={'30%'} alignSelf="flex-end">
+            <Button onClick={cancel}>Cancel</Button>
+            {isL ? (
+              <Button
+                isLoading
+                loadingText="Loading"
+                colorScheme="teal"
+                variant="outline"
+                spinnerPlacement="start"
+                ml={2}
+              >
+                Submit
+              </Button>
+            ) : (
+              <Button onClick={deliverOrder} ml={2} colorScheme="red">
+                Okay
+              </Button>
+            )}
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
@@ -300,9 +446,11 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map(link => (
-        <NavItem key={link.name} icon={link.icon}>
-          <LinkRouter to={`${link.to}`}>{link.name}</LinkRouter>
-        </NavItem>
+        <LinkRouter to={`${link.to}`}>
+          <NavItem key={link.name} icon={link.icon}>
+            {link.name}
+          </NavItem>
+        </LinkRouter>
       ))}
     </Box>
   );
@@ -314,11 +462,7 @@ interface NavItemProps extends FlexProps {
 }
 const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
   return (
-    <Link
-      href="#"
-      style={{ textDecoration: 'none' }}
-      _focus={{ boxShadow: 'none' }}
-    >
+    <Link style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
       <Flex
         align="center"
         p="4"
