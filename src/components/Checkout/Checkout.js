@@ -74,6 +74,11 @@ const Checkout = () => {
           },
         }
       );
+      const del = await axios.delete(url2, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setStatus('success');
       setMessage('Order Placed');
       // console.log(data);
@@ -88,6 +93,7 @@ const Checkout = () => {
     } catch (error) {
       setStatus('error');
       setMessage(error.response.data.msg);
+      console.log(error);
       setIsLoading(false);
       const alert = document.querySelector('.alert');
       alert.style.display = 'flex';
