@@ -31,9 +31,6 @@ import {
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 function App() {
-  React.useEffect(() => {
-    document.title = 'SneakPeak';
-  });
   return (
     <div className="body">
       <ChakraProvider theme={theme}>
