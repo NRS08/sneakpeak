@@ -53,6 +53,30 @@ export const Cart = () => {
       </Stack>
     );
   }
+  if (cartData.length === 0) {
+    return (
+      <Box
+        height={'100vh'}
+        width="100vw"
+        display={'flex'}
+        justifyContent="center"
+        alignItems={'center'}
+        gap={4}
+        flexDirection="column"
+      >
+        <Text fontSize={'4xl'} fontWeight="bold">
+          Your Cart is Empty
+        </Text>
+        <Link
+          fontSize={'lg'}
+          fontWeight={'semibold'}
+          color={colorMode === 'light' ? 'blue.500' : 'blue.200'}
+        >
+          <LinkRouter to="/">Continue shopping...</LinkRouter>
+        </Link>
+      </Box>
+    );
+  }
   return (
     <Box
       maxW={{

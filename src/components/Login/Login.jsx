@@ -42,7 +42,6 @@ export const Login = () => {
       const { data } = await axios.post(url, { email, password });
       setStatus('success');
       setMessage('Logged In');
-      // console.log(data);
       const alert = document.querySelector('.alert');
       alert.style.display = 'flex';
       setPassword('');

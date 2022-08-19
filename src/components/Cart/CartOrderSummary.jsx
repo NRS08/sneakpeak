@@ -31,14 +31,11 @@ const OrderSummaryItem = props => {
 };
 
 export const CartOrderSummary = props => {
-  // console.log(props);
   const navigate = useNavigate();
-  // const [price, setPrice] = React.useState(0);
   var p = 0;
   Object.keys(props).map(index => {
     p = p + props[index].price;
   });
-  // setPrice(p);
   return (
     <Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full">
       <Heading size="md">Order Summary</Heading>
@@ -69,7 +66,7 @@ export const CartOrderSummary = props => {
         size="lg"
         fontSize="md"
         rightIcon={<FaArrowRight />}
-        onClick={() => navigate('/checkout', { state: props })}
+        onClick={() => navigate('/checkout')}
       >
         Checkout
       </Button>
