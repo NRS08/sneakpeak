@@ -51,11 +51,11 @@ import * as React from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { FiChevronDown } from 'react-icons/fi';
 
-var url = 'https://sneakpeak-api.herokuapp.com/api/v1/shoes';
+var url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/shoes';
 const token = localStorage.getItem('token');
 
 export default function Navbar() {
-  const url = 'https://sneakpeak-api.herokuapp.com/api/v1/cart';
+  const url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/cart';
   // const [cartCount, setCartCount] = React.useState('0');
   const { cartCount, setCartCount } = useGlobalContext();
   const [isLoading, setIsLoading] = React.useState('true');

@@ -27,7 +27,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
-  const url = 'https://sneakpeak-api.herokuapp.com/api/v1/auth/login';
+  const url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/auth/login';
   const { colorMode } = useColorMode();
   const h = window.innerHeight;
   const { password, setPassword } = useGlobalContext();

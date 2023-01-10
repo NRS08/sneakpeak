@@ -14,7 +14,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export const CartItem = props => {
-  const url = 'https://sneakpeak-api.herokuapp.com/api/v1/cart';
+  const url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/cart';
   const { name, size, image, price } = props;
   const currency = 'INR';
   const colorMode = useColorMode();

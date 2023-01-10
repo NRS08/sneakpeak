@@ -7,7 +7,7 @@ import { Heading } from '@chakra-ui/react';
 import axios from 'axios';
 
 export const Trending = () => {
-  const url = 'https://sneakpeak-api.herokuapp.com/api/v1/shoes?limit=4';
+  const url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/shoes?limit=4';
   const [isLoading, setIsLoading] = React.useState(true);
   const [products, setProducts] = React.useState([]);
   React.useEffect(() => {

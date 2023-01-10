@@ -16,8 +16,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
-  const url = 'https://sneakpeak-api.herokuapp.com/api/v1/order/';
-  const url2 = 'https://sneakpeak-api.herokuapp.com/api/v1/cart';
+  const url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/order/';
+  const url2 = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/cart';
   const navigate = useNavigate();
   const [discount, setDiscount] = useState(0);
   const [message, setMessage] = useState('Okay');

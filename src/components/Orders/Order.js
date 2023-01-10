@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { CartItem } from '../Checkout/CartItem';
 
 const Order = () => {
-  const url = 'https://sneakpeak-api.herokuapp.com/api/v1/order/myorders';
+  const url =
+    'https://rich-pink-nematode-boot.cyclic.app/api/v1/order/myorders';
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);

@@ -24,8 +24,8 @@ import { useGlobalContext } from '../context';
 import Navbar from './Navbar';
 
 export const Product = props => {
-  var url = 'https://sneakpeak-api.herokuapp.com/api/v1/shoes';
-  const url2 = 'https://sneakpeak-api.herokuapp.com/api/v1/cart';
+  var url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/shoes';
+  const url2 = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/cart';
   const { cartCount, setCartCount } = useGlobalContext();
   const navigate = useNavigate();
   const { colorMode } = useColorMode();

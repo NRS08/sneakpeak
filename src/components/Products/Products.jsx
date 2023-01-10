@@ -27,7 +27,7 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 export const Products = () => {
-  const url = 'https://sneakpeak-api.herokuapp.com/api/v1/shoes';
+  const url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/shoes';
   const { colorMode } = useColorMode();
   const [isOpen, setIsOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);

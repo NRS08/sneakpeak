@@ -68,8 +68,8 @@ const LinkItems: Array<LinkItemProps> = [
 ];
 
 export default function Products({ children }: { children: ReactNode }) {
-  const url = 'https://sneakpeak-api.herokuapp.com/api/v1/shoes/';
-  const url1 = 'https://sneakpeak-api.herokuapp.com/api/v1/order/name';
+  const url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/shoes/';
+  const url1 = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/order/name';
 
   const navigate = useNavigate();
   const { colorMode } = useColorMode();
