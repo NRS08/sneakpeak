@@ -16,25 +16,44 @@ import {
   useColorMode,
   Alert,
   AlertIcon,
+  IconButton,
+  InputGroup,
+  InputRightElement,
+  useDisclosure,
+  useMergeRefs,
 } from '@chakra-ui/react';
+import { HiEye, HiEyeOff } from 'react-icons/hi';
 import * as React from 'react';
 import { Logo } from './Logo';
-import { PasswordField } from './PasswordField';
 import { Link as LinkRouter } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useGlobalContext } from '../../context';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 export const Login = () => {
   const url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/auth/login';
   const { colorMode } = useColorMode();
   const h = window.innerHeight;
-  const { password, setPassword } = useGlobalContext();
+  const [password, setPassword] = useState('');
   const [message, setMessage] = React.useState('');
   const [status, setStatus] = React.useState('error');
   const [isLoading, setIsLoading] = React.useState(false);
   const navigate = useNavigate();
+  const { isOpen, onToggle } = useDisclosure();
+  const inputRef = React.useRef(null);
+
+  const onClickReveal = () => {
+    onToggle();
+
+    if (inputRef.current) {
+      inputRef.current.focus({
+        preventScroll: true,
+      });
+    }
+  };
+
   const login = async () => {
     try {
       setIsLoading(true);
@@ -174,7 +193,31 @@ export const Login = () => {
                 <FormLabel htmlFor="email">Email</FormLabel>
                 <Input id="email" type="email" />
               </FormControl>
-              <PasswordField />
+              {/* <PasswordField /> */}
+              <FormControl>
+                <FormLabel htmlFor="password">Password</FormLabel>
+                <InputGroup>
+                  <InputRightElement>
+                    <IconButton
+                      variant="link"
+                      aria-label={isOpen ? 'Mask password' : 'Reveal password'}
+                      icon={isOpen ? <HiEyeOff /> : <HiEye />}
+                      onClick={onClickReveal}
+                    />
+                  </InputRightElement>
+                  <Input
+                    id="password"
+                    // ref={mergeRef}
+                    name="password"
+                    type={isOpen ? 'text' : 'password'}
+                    autoComplete="current-password"
+                    required
+                    // {...props}
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                  />
+                </InputGroup>
+              </FormControl>
             </Stack>
             <HStack justify="space-between">
               <Checkbox defaultChecked>Remember me</Checkbox>

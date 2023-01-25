@@ -176,25 +176,25 @@ export default function Navbar() {
             <Button variant="ghost">
               <FavoriteIcon />
             </Button>
-            <Button position={'relative'} variantColor="" variant="ghost">
-              <Box
-                height={'45%'}
-                width={'35%'}
-                position={'absolute'}
-                bg={useColorModeValue('#4a5568', 'white')}
-                borderRadius={'50%'}
-                top="-5%"
-                right={'20%'}
-                color={useColorModeValue('white', 'black')}
-                textAlign={'center'}
-                fontSize="sm"
-              >
-                {cartCount}
-              </Box>
-              <LinkRouter to="/cart">
+            <LinkRouter to="/cart">
+              <Button position={'relative'} variantColor="" variant="ghost">
+                <Box
+                  height={'45%'}
+                  width={'35%'}
+                  position={'absolute'}
+                  bg={useColorModeValue('#4a5568', 'white')}
+                  borderRadius={'50%'}
+                  top="-5%"
+                  right={'20%'}
+                  color={useColorModeValue('white', 'black')}
+                  textAlign={'center'}
+                  fontSize="sm"
+                >
+                  {cartCount}
+                </Box>
                 <ShoppingCart />
-              </LinkRouter>
-            </Button>
+              </Button>
+            </LinkRouter>
           </Stack>
           {/* <Button
             display={{ base: 'none', md: 'inline-flex' }}
