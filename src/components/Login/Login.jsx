@@ -117,7 +117,7 @@ export const Login = () => {
         {message}
       </Alert>
       <Stack
-        w={{ base: '90%', sm: '98%' }}
+        // w={{ base: '95%', sm: '100%', lg: '60%' }}
         spacing="8"
         boxShadow={
           colorMode === 'light'
