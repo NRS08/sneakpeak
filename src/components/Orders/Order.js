@@ -37,7 +37,7 @@ const Order = () => {
     if (token) {
       getData();
     } else {
-      navigate('/login/admin');
+      navigate('/login');
     }
   }, [s]);
 
