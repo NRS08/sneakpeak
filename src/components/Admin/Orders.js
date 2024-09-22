@@ -65,7 +65,7 @@ const LinkItems: Array<LinkItemProps> = [
 ];
 
 export default function Orders({ children }: { children: ReactNode }) {
-  const url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/order';
+  const url = process.env.REACT_APP_API_BASE_URL + '/order';
   const navigate = useNavigate();
   const { colorMode } = useColorMode();
   const [isLoading, setIsLoading] = useState(true);

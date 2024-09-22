@@ -14,7 +14,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export const CartItem = props => {
-  const url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/cart';
+  const url = process.env.REACT_APP_API_BASE_URL + '/cart';
   const { name, size, image, price } = props;
   const currency = 'INR';
   const colorMode = useColorMode();

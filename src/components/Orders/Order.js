@@ -7,8 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { CartItem } from '../Checkout/CartItem';
 
 const Order = () => {
-  const url =
-    'https://rich-pink-nematode-boot.cyclic.app/api/v1/order/myorders';
+  const url = process.env.REACT_APP_API_BASE_URL + '/order/myorders';
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);

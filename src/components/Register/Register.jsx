@@ -26,7 +26,7 @@ import './Register.css';
 import { useNavigate } from 'react-router-dom';
 
 export const Register = () => {
-  const url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/auth/register';
+  const url = process.env.REACT_APP_API_BASE_URL + '/auth/register';
   const [isLoading, setIsLoading] = React.useState(false);
   const { colorMode } = useColorMode();
   const { password, setPassword } = useGlobalContext();

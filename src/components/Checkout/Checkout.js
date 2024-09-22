@@ -16,8 +16,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
-  const url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/order/';
-  const url2 = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/cart';
+  const url = process.env.REACT_APP_API_BASE_URL + '/order/';
+  const url2 = process.env.REACT_APP_API_BASE_URL + '/cart';
   const navigate = useNavigate();
   const [discount, setDiscount] = useState(0);
   const [message, setMessage] = useState('Okay');

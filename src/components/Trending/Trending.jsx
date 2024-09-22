@@ -7,7 +7,7 @@ import { Heading } from '@chakra-ui/react';
 import axios from 'axios';
 
 export const Trending = () => {
-  const url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/shoes?limit=4';
+  const url = process.env.REACT_APP_API_BASE_URL + '/shoes?limit=4';
   const [isLoading, setIsLoading] = React.useState(true);
   const [products, setProducts] = React.useState([]);
   React.useEffect(() => {

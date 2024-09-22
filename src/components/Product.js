@@ -24,8 +24,8 @@ import { useGlobalContext } from '../context';
 import Navbar from './Navbar';
 
 export const Product = props => {
-  var url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/shoes';
-  const url2 = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/cart';
+  var url = process.env.REACT_APP_API_BASE_URL + '/shoes';
+  const url2 = process.env.REACT_APP_API_BASE_URL + '/cart';
   const { cartCount, setCartCount } = useGlobalContext();
   const navigate = useNavigate();
   const { colorMode } = useColorMode();

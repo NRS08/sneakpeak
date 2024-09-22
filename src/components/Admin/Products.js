@@ -68,8 +68,8 @@ const LinkItems: Array<LinkItemProps> = [
 ];
 
 export default function Products({ children }: { children: ReactNode }) {
-  const url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/shoes/';
-  const url1 = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/order/name';
+  const url = process.env.REACT_APP_API_BASE_URL + '/shoes/';
+  const url1 = process.env.REACT_APP_API_BASE_URL + '/order/name';
 
   const navigate = useNavigate();
   const { colorMode } = useColorMode();

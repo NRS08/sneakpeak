@@ -18,7 +18,7 @@ import { Link as LinkRouter } from 'react-router-dom';
 import { useGlobalContext } from '../../context';
 
 export const Cart = () => {
-  const url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/cart';
+  const url = process.env.REACT_APP_API_BASE_URL + '/cart';
   const navigate = useNavigate();
   const { cartData, setCartData } = useGlobalContext();
   // const [data, setData] = React.useState();

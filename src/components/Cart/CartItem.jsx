@@ -32,7 +32,7 @@ const QuantitySelect = props => {
 };
 
 export const CartItem = props => {
-  const url = 'https://rich-pink-nematode-boot.cyclic.app/api/v1/cart';
+  const url = process.env.REACT_APP_API_BASE_URL + '/cart';
   const { setCartData, cartData } = useGlobalContext();
   const { name, description, size, image, price } = props;
   const currency = 'INR';
